@@ -9,11 +9,11 @@ clock = pygame.time.Clock()
 running = True
 
 ball = Ball(screen)
-brick = Brick(screen, (100, 100))
-wall = Wall(brick)
-
+wall = Wall()
+ball.y_speed = -5
 
 while running:
+    ball.move()
     #poll for events
     #pygame.QUIT event means the user clicked X to close the window
     for event in pygame.event.get():
@@ -23,8 +23,7 @@ while running:
     screen.fill((0, 0, 0))
     #RENDER GAME HERE
     ball.update(screen)
-    brick.update(screen)
-
+    wall.update(screen)
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
