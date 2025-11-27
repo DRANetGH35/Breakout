@@ -10,5 +10,9 @@ def collision(ball, brick):
     distance = math.sqrt(distance_x ** 2 + distance_y ** 2)
 
     if distance < ball.radius:
+        if distance_x < distance_y:
+            ball.x_speed = -ball.x_speed
+        else:
+            ball.y_speed = -ball.y_speed
         return True
     return False

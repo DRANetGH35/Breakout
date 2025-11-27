@@ -12,6 +12,7 @@ running = True
 ball = Ball(screen)
 wall = Wall()
 ball.y_speed = -5
+ball.x_speed = -2
 
 while running:
     ball.move()
@@ -25,7 +26,7 @@ while running:
     #RENDER GAME HERE
     for brick in wall:
         if collision(ball, brick):
-            brick.color = (255, 0, 0)
+            brick.kill()
     wall.update(screen)
     ball.update(screen)
     pygame.display.flip()
