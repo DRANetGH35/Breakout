@@ -26,8 +26,8 @@ while running:
     for brick in wall:
         if collision(ball, brick):
             brick.color = (255, 0, 0)
-    ball.update(screen)
     wall.update(screen)
+    ball.update(screen)
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
