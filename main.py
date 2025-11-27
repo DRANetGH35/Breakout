@@ -1,4 +1,5 @@
 import pygame
+from collision import collision
 from Ball import Ball
 from Brick import Brick
 from Wall import Wall
@@ -22,6 +23,9 @@ while running:
     # wipe anything from last frame
     screen.fill((0, 0, 0))
     #RENDER GAME HERE
+    for brick in wall:
+        if collision(ball, brick):
+            brick.color = (255, 0, 0)
     ball.update(screen)
     wall.update(screen)
     pygame.display.flip()
