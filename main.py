@@ -1,8 +1,9 @@
 import pygame
-from collision import collision
+from collision import collision, boundary_collision
 from Ball import Ball
 from Brick import Brick
 from Wall import Wall
+from Boundary import Boundary
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
@@ -11,8 +12,9 @@ running = True
 
 ball = Ball(screen)
 wall = Wall()
-ball.y_speed = -5
-ball.x_speed = -2
+ball.y_speed = -1
+ball.x_speed = -11
+boundary = Boundary(screen)
 
 while running:
     ball.move()
@@ -27,6 +29,8 @@ while running:
     for brick in wall:
         if collision(ball, brick):
             brick.kill()
+    boundary_collision(ball, boundary)
+    boundary.update(screen)
     wall.update(screen)
     ball.update(screen)
     pygame.display.flip()

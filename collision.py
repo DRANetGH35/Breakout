@@ -16,3 +16,11 @@ def collision(ball, brick):
             ball.y_speed = -ball.y_speed
         return True
     return False
+
+def boundary_collision(ball, boundary):
+    if ball.x_speed > 0 and ball.pos[0] > boundary.RIGHT_SIDE:
+        ball.x_speed = -ball.x_speed
+    if ball.x_speed < 0 and ball.pos[0] < boundary.LEFT_SIDE:
+        ball.x_speed = -ball.x_speed
+    if ball.y_speed < 0 and ball.pos[1] < boundary.TOP_SIDE:
+        ball.y_speed = -ball.y_speed
