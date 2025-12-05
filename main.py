@@ -1,10 +1,9 @@
 import pygame
 from collision import collision, boundary_collision, pit_collision
 from Ball import Ball
-from Brick import Brick
 from Wall import Wall
 from Boundary import Boundary
-
+from Paddle import Paddle
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
@@ -15,6 +14,7 @@ wall = Wall()
 ball.y_speed = -1
 ball.x_speed = -11
 boundary = Boundary(screen)
+paddle = Paddle(screen)
 
 while running:
     ball.move()
@@ -23,6 +23,13 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                paddle.direction = 'left'
+            if event.key == pygame.K_RIGHT:
+                paddle.direction = 'right'
+        elif event.type == pygame.KEYUP:
+            paddle.direction = None
     # wipe anything from last frame
     screen.fill((0, 0, 0))
     #RENDER GAME HERE
@@ -35,6 +42,7 @@ while running:
     boundary.update(screen)
     wall.update(screen)
     ball.update(screen)
+    paddle.update(screen)
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
