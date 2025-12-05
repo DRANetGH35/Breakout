@@ -1,5 +1,5 @@
 import pygame
-from collision import collision, boundary_collision, pit_collision
+from collision import collision, boundary_collision, pit_collision, paddle_collision
 from Ball import Ball
 from Wall import Wall
 from Boundary import Boundary
@@ -11,8 +11,8 @@ running = True
 
 ball = Ball(screen)
 wall = Wall()
-ball.y_speed = -1
-ball.x_speed = -11
+ball.y_speed = -5
+ball.x_speed = -5
 boundary = Boundary(screen)
 paddle = Paddle(screen)
 
@@ -39,6 +39,7 @@ while running:
     boundary_collision(ball, boundary)
     if pit_collision(ball, boundary):
         ball.stop()
+    paddle_collision(ball, paddle, boundary)
     boundary.update(screen)
     wall.update(screen)
     ball.update(screen)

@@ -24,7 +24,12 @@ def boundary_collision(ball, boundary):
         ball.x_speed = -ball.x_speed
     if ball.y_speed < 0 and ball.pos[1] < boundary.TOP_SIDE:
         ball.y_speed = -ball.y_speed
+
 def pit_collision(ball, boundary):
     if ball.pos[1] > boundary.BOTTOM_SIDE:
         return True
     return False
+def paddle_collision(ball, paddle, boundary):
+    if ball.pos[1] > boundary.HEIGHT - paddle.height - ball.radius and ball.y_speed > 0 and ball.pos[0] > paddle.pos[0] and ball.pos[0] < paddle.pos[0] + paddle.width:
+        ball.y_speed = -ball.y_speed
+        ball.x_speed = .1 * (ball.pos[0] - (paddle.pos[0] + (.5 * paddle.width)))
