@@ -1,5 +1,5 @@
 import pygame
-from collision import collision, boundary_collision
+from collision import collision, boundary_collision, pit_collision
 from Ball import Ball
 from Brick import Brick
 from Wall import Wall
@@ -30,6 +30,8 @@ while running:
         if collision(ball, brick):
             brick.kill()
     boundary_collision(ball, boundary)
+    if pit_collision(ball, boundary):
+        ball.stop()
     boundary.update(screen)
     wall.update(screen)
     ball.update(screen)

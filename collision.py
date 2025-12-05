@@ -24,3 +24,7 @@ def boundary_collision(ball, boundary):
         ball.x_speed = -ball.x_speed
     if ball.y_speed < 0 and ball.pos[1] < boundary.TOP_SIDE:
         ball.y_speed = -ball.y_speed
+def pit_collision(ball, boundary):
+    if ball.pos[1] > boundary.BOTTOM_SIDE:
+        return True
+    return False
