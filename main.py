@@ -9,6 +9,8 @@ screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
 
+bounce_sound = pygame.mixer.Sound('SoundEffects/retro-select-236670.mp3')
+
 ball = Ball(screen)
 wall = Wall()
 ball.y_speed = -5

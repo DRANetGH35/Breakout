@@ -1,4 +1,7 @@
 import math
+import pygame
+pygame.mixer.init()
+bounce_sound = pygame.mixer.Sound('SoundEffects/retro-select-236670.mp3')
 
 def collision(ball, brick):
     closest_x = max(brick.pos[0], min(ball.pos[0], brick.pos[0] + brick.width))
@@ -14,22 +17,28 @@ def collision(ball, brick):
             ball.x_speed = -ball.x_speed
         else:
             ball.y_speed = -ball.y_speed
+        bounce_sound.play()
         return True
     return False
 
 def boundary_collision(ball, boundary):
     if ball.x_speed > 0 and ball.pos[0] > boundary.RIGHT_SIDE:
         ball.x_speed = -ball.x_speed
+        bounce_sound.play()
     if ball.x_speed < 0 and ball.pos[0] < boundary.LEFT_SIDE:
         ball.x_speed = -ball.x_speed
+        bounce_sound.play()
     if ball.y_speed < 0 and ball.pos[1] < boundary.TOP_SIDE:
         ball.y_speed = -ball.y_speed
+        bounce_sound.play()
 
 def pit_collision(ball, boundary):
     if ball.pos[1] > boundary.BOTTOM_SIDE:
+        bounce_sound.play()
         return True
     return False
 def paddle_collision(ball, paddle, boundary):
     if ball.pos[1] > boundary.HEIGHT - paddle.height - ball.radius and ball.y_speed > 0 and ball.pos[0] > paddle.pos[0] and ball.pos[0] < paddle.pos[0] + paddle.width:
+        bounce_sound.play()
         ball.y_speed = -ball.y_speed
         ball.x_speed = .1 * (ball.pos[0] - (paddle.pos[0] + (.5 * paddle.width)))
