@@ -17,6 +17,9 @@ boundary = Boundary(screen)
 paddle = Paddle(screen)
 
 while running:
+    if not wall.sprites():
+        print("You win")
+        running = False
     ball.move()
     #poll for events
     #pygame.QUIT event means the user clicked X to close the window
@@ -39,6 +42,8 @@ while running:
     boundary_collision(ball, boundary)
     if pit_collision(ball, boundary):
         ball.stop()
+        running = False
+        print("You lose")
     paddle_collision(ball, paddle, boundary)
     boundary.update(screen)
     wall.update(screen)
